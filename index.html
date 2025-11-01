@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Birthday 💫</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+  --bg:#1b0b1a;
+  --card:#2a152a;
+  --accent:#ff7eb6;
+  --muted:#c4adc9;
+}
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(255,107,107,0.06), transparent 10%),
+                linear-gradient(180deg,#071024 0%, #0e1524 100%);
+    color:#e6eef8; -webkit-font-smoothing:antialiased;
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    padding:20px;
+  }
+
+  .card{
+    width:100%; max-width:780px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:18px; padding:28px; box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    border:1px solid rgba(255,255,255,0.03);
+    position:relative; overflow:hidden;
+  }
+
+  .top{
+    display:flex; gap:18px; align-items:center;
+  }
+  .avatar {
+  width: 74px;
+  height: 74px;
+  border-radius: 14px; /* or 50% if you want circle */
+  object-fit: cover;
+  flex: 0 0 74px;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+  h1{margin:0; font-size:20px;}
+  p.lead{margin:6px 0 0; color:var(--muted); font-size:14px}
+
+  .hero{
+    margin-top:22px; display:flex; gap:18px; align-items:center;
+    flex-wrap:wrap;
+  }
+
+  .big{
+    flex:1 1 320px;
+  }
+  .action{
+    display:flex; gap:10px; margin-top:14px;
+  }
+  button{
+    background:linear-gradient(90deg,var(--accent),#ff9f43); border:0; padding:10px 16px; color:#071124; border-radius:12px; font-weight:700; cursor:pointer;
+    box-shadow: 0 6px 18px rgba(255,107,107,0.12);
+  }
+  button.ghost{
+    background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.03);
+  }
+
+  .reveal{
+    margin-top:18px; background:rgba(255,255,255,0.02); padding:16px; border-radius:12px; min-height:120px;
+    display:flex; align-items:center; justify-content:center; text-align:center; position:relative;
+  }
+
+  .hidden{
+    opacity:0; transform:translateY(8px);
+  }
+  .message{ font-size:16px; line-height:1.5; color:#f8fbff; }
+
+  .gallery { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+  .gallery img{width:calc(33.333% - 6px); border-radius:10px; object-fit:cover; height:86px; border:1px solid rgba(255,255,255,0.04);}
+
+  .reply{ margin-top:14px; display:flex; gap:8px; align-items:center;}
+  .reply input{flex:1; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:inherit;}
+  .small{font-size:12px; color:var(--muted); margin-top:10px}
+
+  .credit{position:absolute; right:14px; bottom:10px; font-size:12px; color:rgba(255,255,255,0.06)}
+  @media (max-width:520px){
+    .gallery img{width:calc(50% - 6px); height:80px}
+    .top{gap:12px}
+  }
+
+  /* tiny flourish */
+  .sparkle{
+    position:absolute; right:-40px; top:-40px; width:220px; height:220px; background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 20%), conic-gradient(from 30deg, rgba(255,107,107,0.03), rgba(255,159,67,0.02));
+    transform:rotate(8deg); filter:blur(6px);
+  }
+.gallery {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.gallery img {
+  width: 200px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="sparkle" aria-hidden="true"></div>
+  <div class="top">
+    <img class="avatar" id="avatar" src="https://i.ibb.co/9mGYQDpT/E2-DA95-C0-A3-F2-4997-BBD2-2-AAF07-F18739.png" alt="avatar">
+    <div>
+      <h1>Happy Birthday 🎉</h1>
+      <p class="lead">A little card from someone who thinks you're special — open it when you're ready.</p>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="big">
+      <div class="action">
+        <button id="openBtn">Open your card</button>
+        <button class="ghost" id="playBtn" title="Play voice (if uploaded)">🔊 Play voice</button>
+        <button class="ghost" id="surpriseBtn" title="A little mini-game">✨ Surprise</button>
+      </div>
+
+      <div class="reveal" id="revealArea" aria-live="polite">
+        <div class="message hidden" id="typed"></div>
+      </div>
+
+      <div class="reply">
+        <input id="replyInput" placeholder="Write a quick reply (they won't see this unless you copy & send)" />
+        <button id="copyReply">Copy</button>
+      </div>
+      <div class="small">Tip: Replace images and audio in the file to personalize. Test on mobile before sending.</div>
+
+    </div>
+
+    <div style="width:220px; flex:0 0 220px;">
+      <div class="gallery" id="gallery">
+  <a href="https://ibb.co/PdCgSGV"><img src="https://i.ibb.co/t9CDdp1/lilo-orange-hair.jpg" alt="memory 1"></a>
+  <a href="https://ibb.co/84P33qcP"><img src="https://i.ibb.co/R4QnnfyQ/lilo-pfp.png" alt="memory 2"></a>
+  <a href="https://ibb.co/4RHTQkfx"><img src="https://i.ibb.co/SwznLSxp/snow-and-arya.jpg" alt="memory 3"></a>
+</div>
+
+
+      <div style="margin-top:12px; font-size:13px; color:var(--muted)">A few favourite snaps!!!</div>
+    </div>
+  </div>
+
+  <div class="credit">Made with ♥ — Nguyen</div>
+</div>
+
+<!-- audio: replace "voice.mp3" with your file hosted same folder or remote link -->
+<audio id="voice" src="voice.mp3" preload="auto"></audio>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+  // small helpers
+  const openBtn = document.getElementById('openBtn');
+  const typedEl = document.getElementById('typed');
+  const revealArea = document.getElementById('revealArea');
+  const playBtn = document.getElementById('playBtn');
+  const voice = document.getElementById('voice');
+  const copyBtn = document.getElementById('copyReply');
+  const replyInput = document.getElementById('replyInput');
+  const surpriseBtn = document.getElementById('surpriseBtn');
+
+  // Customize message here:
+  const messageLines = [
+"HAPPY BIRTHDAY LILO!! TO THE GIRL WHO SOMEHOW MAKES ORDINARY DAYS FEEL SPECIAL!! I HOPE THIS YEAR WILL TREATS YOU WELL THE WAY YOU DESERVE!!!!!!!! ❤️❤️❤️"
+     ];
+
+  function typeOut(lines, el, speed=25){
+    el.innerHTML = "";
+    el.classList.remove('hidden');
+    let iLine = 0, iChar = 0;
+    function tick(){
+      if(iLine >= lines.length) return;
+      const line = lines[iLine];
+      iChar++;
+      el.innerHTML = lines.slice(0,iLine).map(l=>escapeHtml(l)).join('<br>') + '<br>' + escapeHtml(line.slice(0,iChar));
+      if(iChar >= line.length){
+        iLine++; iChar=0;
+        setTimeout(tick, 600);
+      } else setTimeout(tick, speed);
+    }
+    tick();
+  }
+
+  function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  openBtn.addEventListener('click', ()=>{
+    openBtn.disabled = true;
+    // reveal animation
+    revealArea.animate([{opacity:0, transform:'translateY(6px)'},{opacity:1, transform:'translateY(0)'}], {duration:420, easing:'cubic-bezier(.2,.9,.3,1)', fill:'forwards'});
+    // type message
+    typedEl.classList.remove('hidden');
+    typeOut(messageLines, typedEl, 18);
+
+    // confetti
+    setTimeout(()=> {
+      confetti({
+        particleCount: 120,
+        spread: 70,
+        origin: { y: 0.2 }
+      });
+    }, 300);
+    // gentle second burst
+    setTimeout(()=> {
+      confetti({
+        particleCount: 50,
+        spread: 100,
+        scalar: 0.8,
+        origin: { y: 0.1, x: 0.9 }
+      });
+    }, 1200);
+  });
+
+  // play voice if available
+  playBtn.addEventListener('click', ()=>{
+    if(!voice.src || voice.src.endsWith('voice.mp3')) {
+      // if placeholder not replaced, guide user
+      const ok = confirm("No voice file found. Do you want to record/upload a short mp3 and replace 'voice.mp3' in the files?");
+      if(ok) alert("If you're hosting on GitHub Pages, upload voice.mp3 to the same repo and the button will play it.");
+      return;
+    }
+    voice.currentTime = 0; voice.play().catch(()=>{ alert('Playback blocked — try tapping play on mobile.'); });
+  });
+
+  // mini surprise: tiny click game
+  surpriseBtn.addEventListener('click', ()=>{
+    let score = 0;
+    surpriseBtn.disabled = true;
+    surpriseBtn.textContent = 'Tap fast!';
+    const start = Date.now();
+    const handler = ()=> { score++; };
+    document.addEventListener('click', handler);
+    setTimeout(()=>{
+      document.removeEventListener('click', handler);
+      surpriseBtn.textContent = `You got ${score} taps — nice!`;
+      surpriseBtn.disabled = false;
+      // little confetti
+      confetti({ particleCount: 40, origin: { y: 0.4 } });
+    }, 3500);
+  });
+
+  // copy reply box
+  copyBtn.addEventListener('click', ()=>{
+    navigator.clipboard?.writeText(replyInput.value || "Sent from your web card ❤️").then(()=> {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(()=>copyBtn.textContent = 'Copy',1200);
+    }).catch(()=>{ alert('Copy failed — please select and copy manually.'); });
+  });
+
+  // small accessibility: allow Enter on Open
+  openBtn.addEventListener('keyup', (e)=> { if(e.key==='Enter') openBtn.click(); });
+
+  // pre-check: set avatar initial from your name (customize below)
+  (function setAvatar(){
+    const name = "Nguyen"; // replace
+    const avatar = document.getElementById('avatar');
+    avatar.textContent = name.split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase();
+  })();
+
+</script>
+</body>
+</html>
