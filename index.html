@@ -223,16 +223,10 @@
     }, 1200);
   });
 
-  // play voice if available
-  playBtn.addEventListener('click', ()=>{
-    if(!voice.src || voice.src.endsWith('voice.mp3')) {
-      // if placeholder not replaced, guide user
-      const ok = confirm("No voice file found. Do you want to record/upload a short mp3 and replace 'voice.mp3' in the files?");
-      if(ok) alert("If you're hosting on GitHub Pages, upload voice.mp3 to the same repo and the button will play it.");
-      return;
-    }
-    voice.currentTime = 0; voice.play().catch(()=>{ alert('Playback blocked — try tapping play on mobile.'); });
-  });
+ // play voice if available
+playBtn.addEventListener('click', ()=>{
+  voice.currentTime = 0; voice.play().catch(()=>{ alert('Playback blocked — try tapping play on mobile.'); });
+});
 
   // mini surprise: tiny click game
   surpriseBtn.addEventListener('click', ()=>{
@@ -272,3 +266,4 @@
 </script>
 </body>
 </html>
+
