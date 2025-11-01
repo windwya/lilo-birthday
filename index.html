@@ -16,9 +16,8 @@
   *{box-sizing:border-box}
   body{
     margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background: radial-gradient(1200px 600px at 10% 10%, rgba(255,107,107,0.06), transparent 10%),
-                linear-gradient(180deg,#071024 0%, #0e1524 100%);
-    color:#e6eef8; -webkit-font-smoothing:antialiased;
+    background: linear-gradient(180deg,var(--bg) 0%, var(--card) 100%); /* Use light theme variables for background */
+    color:#2c002c; -webkit-font-smoothing:antialiased; /* Change text color to dark for contrast */
     min-height:100vh; display:flex; align-items:center; justify-content:center;
     padding:20px;
   }
@@ -267,6 +266,7 @@ playBtn.addEventListener('click', ()=>{
 </script>
 </body>
 </html>
+
 
 
 
